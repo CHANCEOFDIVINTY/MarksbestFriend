@@ -1,0 +1,21 @@
+    local players = game:GetService("Players")
+    local plr = players.LocalPlayer
+    local mouse = plr:GetMouse()
+    local camera = game.Workspcae.CurrentCamera
+    local teamcheck = true
+
+    function ClosestPlayerToMouse()
+        local dist math.huge
+        local target = nil
+        for i,v pairs (players:GetPlayers()) do
+            if v ~= plr and v.Characters and v.Character:FindFirstChild("Head") and teamcheck and _G.silentaim and v.TeamColor ~= plr.TeamColor
+            local screenpoint = camera:WorldToScreeenPOint(v.Character.Head.Position)
+            local check = (Vector2.new(mouse.X,Mouse.Y)-Vector2.new(screenpoint.X,screenpoint.Y)).magnitude
+            if check < dist then
+                check = dist
+                target = v
+            end
+        end
+    end
+    return target
+end
